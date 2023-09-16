@@ -4,7 +4,15 @@ form.addEventListener('submit', async function(e) {
     const searchTerm = form.elements.query.value;
     // async function
     const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${searchTerm}`);
-    const image = document.createElement('IMG');
-    image.src = response.data[0].show.image.medium;
-    document.body.append(image);
+    addImages(response.data);
 })
+
+const addImages = (results) => {
+    for (let result of results) {
+        if (result.show.image) {
+            const image = document.createElement('IMG');
+            image.src = result.show.image.medium;
+            document.body.append(image);
+        }
+    }
+}
