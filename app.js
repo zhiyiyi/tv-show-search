@@ -4,5 +4,7 @@ form.addEventListener('submit', async function(e) {
     const searchTerm = form.elements.query.value;
     // async function
     const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${searchTerm}`);
-    console.log(response.data);
+    const image = document.createElement('IMG');
+    image.src = response.data[0].show.image.medium;
+    document.body.append(image);
 })
